@@ -1,20 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.Entities
 {
-    public class EVL
+    public class Evl
     {
-        public Int64 EVLID { get; set; }
-        public String Code { get; set; }
-        public String Naam { get; set; }
-        public String Beschrijving { get; set; }
-        public String Beroepstaken { get; set; }
-        public String Eindkwalificaties { get; set; }
-        public Double Studiepunten { get; set; }
+        public int Id { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Code { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Naam { get; set; }
+
+        [Required]
+        [MaxLength(300)]
+        public string Beschrijving { get; set; }
+
+        [Required]
+        public double Studiepunten { get; set; }
+
+        [Required]
+        [MaxLength(300)]
+        public string Beroepstaken { get; set; } // class voor maken?
+
+        [Required]
+        [MaxLength(300)]
+        public string Eindkwalificaties { get; set; } // class voor maken?
+
+
 
         // RELATIES
         // one EVL to many Leeruitkomsten

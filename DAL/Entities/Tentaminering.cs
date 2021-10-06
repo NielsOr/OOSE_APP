@@ -1,23 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Entities
 {
     public class Tentaminering
     {
-        public Int64 TentamineringID { get; set; } // PK
-        public Int64 EVLID { get; set; } // FK
-        public String Naam { get; set; }
-        public String Code { get; set; }
-        public String AanmeldingsType  { get; set; }
-        public String Hulpmiddelen { get; set; }
-        public Double Weging { get; set; }
-        public Double MinimaalOordeel { get; set; }
-        public String Tentamenvorm { get; set; }
+        public int Id { get; set; } // PK
+
+        [Required]
+        [MaxLength(100)]
+        public string Naam { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Code { get; set; }
+
+        [Required]
+        [MaxLength(300)]
+        public string Aanmeldingstype  { get; set; }
+
+        [Required]
+        [MaxLength(300)]
+        public string Hulpmiddelen { get; set; }
+
+        [Required]
+        public int Weging { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public double MinimaalOordeel { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string Tentamenvorm { get; set; }
+
 
         //RELATIES
+        // one EVL to many Tentamineringen
+
+        [Required]
+        public Evl Evl { get; set; }
+
         // many Tentaminering to many Leeruitkomsten
         public ICollection<Leeruitkomst> Leeruitkomsten { get; set; }
+
         // one Tentaminering to many Beoordelingsdimensies
         public ICollection<Beoordelingsdimensie> Beoordelingsdimensies { get; set; }
 
