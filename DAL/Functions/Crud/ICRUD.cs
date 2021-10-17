@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DAL.Functions.Crud
 {
-    public interface ICRUD
+    public interface ICrud
     {
         Task<T> Create<T>(T objectForDb) where T : class;
         Task<T> Read<T>(int entityId) where T : class;

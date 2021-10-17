@@ -8,51 +8,51 @@ namespace WEB_API.Controllers
     [ApiController]
     public class EvlController : ControllerBase
     {
-        private IEvl_Service _evl_Service;
+        private readonly IEvlService _evlService;
 
-        public EvlController(IEvl_Service evl_Service)
+        public EvlController(IEvlService evlService)
         {
-            _evl_Service = evl_Service;
+            _evlService = evlService;
         }
 
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetEvls()
         {
-            var result = await _evl_Service.GetEvls();
-            return result.success == true ? Ok(result) : StatusCode(500, result);
+            var result = await _evlService.GetEvls();
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
 
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetEvlById(int id)
         {
-            var result = await _evl_Service.GetEvlById(id);
-            return result.success == true ? Ok(result) : StatusCode(500, result);
+            var result = await _evlService.GetEvlById(id);
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
 
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> AddEvl(CreateEvlSchema evl)
         {
-            var result = await _evl_Service.AddEvl(evl.Code, evl.Naam, evl.Beroepstaken, evl.Eindkwalificaties, evl.Beschrijving, evl.Studiepunten);
-            return result.success == true? Ok(result) : StatusCode(500, result);
+            var result = await _evlService.AddEvl(evl.Code, evl.Naam, evl.Beroepstaken, evl.Eindkwalificaties, evl.Beschrijving, evl.Studiepunten);
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
 
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> UpdateEvl(UpdateEvlSchema evl)
         {
-            var result = await _evl_Service.UpdateEvl(evl.Id, evl.Code, evl.Naam, evl.Beroepstaken, evl.Eindkwalificaties, evl.Beschrijving, evl.Studiepunten);
-            return result.success == true ? Ok(result) : StatusCode(500, result);
+            var result = await _evlService.UpdateEvl(evl.Id, evl.Code, evl.Naam, evl.Beroepstaken, evl.Eindkwalificaties, evl.Beschrijving, evl.Studiepunten);
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
 
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> DeleteEvl(int id)
         {
-            var result = await _evl_Service.DeleteEvl(id);
-            return result.success == true ? Ok(result) : StatusCode(500, result);
+            var result = await _evlService.DeleteEvl(id);
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
 
         /*[HttpPost]

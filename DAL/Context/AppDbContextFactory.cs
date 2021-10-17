@@ -1,12 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
 namespace DAL.Context
 {
-    //Allows for db migrations and db structure updates and changes from this DAL project
-  
+    // Allows for db migrations and db structure updates and changes from this DAL project
+
     public class DatabaseContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
         //Create a DatabaseContext which must be used when performing a database migration.
@@ -17,7 +17,7 @@ namespace DAL.Context
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
-            DbContextOptionsBuilder<AppDbContext> optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            DbContextOptionsBuilder<AppDbContext> optionsBuilder = new();
             optionsBuilder.UseSqlServer(config.GetConnectionString("sql"));
             return new AppDbContext(optionsBuilder.Options);
         }

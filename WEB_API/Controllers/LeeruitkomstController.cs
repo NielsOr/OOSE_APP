@@ -8,44 +8,43 @@ namespace WEB_API.Controllers
     [ApiController]
     public class LeeruitkomstController : ControllerBase
     {
-        private ILeeruitkomst_Service _leeruitkomst_Service;
+        private ILeeruitkomstService _leeruitkomstService;
 
-        public LeeruitkomstController (ILeeruitkomst_Service leeruitkomst_Service)
+        public LeeruitkomstController(ILeeruitkomstService leeruitkomstService)
         {
-            _leeruitkomst_Service = leeruitkomst_Service;
+            _leeruitkomstService = leeruitkomstService;
         }
 
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetLeeruitkomstById(int id)
         {
-            var result = await _leeruitkomst_Service.GetLeeruitkomstById(id);
-            return result.success == true ? Ok(result) : StatusCode(500, result);
+            var result = await _leeruitkomstService.GetLeeruitkomstById(id);
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
 
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> AddLeeruitkomst(CreateLeeruitkomstSchema leeruitkomst)
         {
-            var result = await _leeruitkomst_Service.AddLeeruitkomst(leeruitkomst.EvlId, leeruitkomst.Naam, leeruitkomst.Beschrijving);
-            return result.success == true ? Ok(result) : StatusCode(500, result);
+            var result = await _leeruitkomstService.AddLeeruitkomst(leeruitkomst.EvlId, leeruitkomst.Naam, leeruitkomst.Beschrijving);
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
 
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> UpdateLeeruitkomst(UpdateLeeruitkomstSchema leeruitkomst)
         {
-            var result = await _leeruitkomst_Service.UpdateLeeruitkomst(leeruitkomst.Id, leeruitkomst.Naam, leeruitkomst.Beschrijving);
-            return result.success == true ? Ok(result) : StatusCode(500, result);
+            var result = await _leeruitkomstService.UpdateLeeruitkomst(leeruitkomst.Id, leeruitkomst.Naam, leeruitkomst.Beschrijving);
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
 
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> DeleteLeeruitkomst(int id)
         {
-            var result = await _leeruitkomst_Service.DeleteLeeruitkomst(id);
-            return result.success == true ? Ok(result) : StatusCode(500, result);
+            var result = await _leeruitkomstService.DeleteLeeruitkomst(id);
+            return result.Success == true ? Ok(result) : StatusCode(500, result);
         }
-
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
+﻿using DAL.Context;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using DAL.Context;
 
 namespace DAL.Functions.Crud
 {
@@ -10,7 +9,7 @@ namespace DAL.Functions.Crud
     /// Generic based CRUD methods, Create, Read, Update, Delete methods.
     /// <para>In region: BASIC EXAMPLE WITHOUT - DI : you will find a very basic set of examples</para>
     /// </summary>
-    public class CRUD: ICRUD
+    public class Crud : ICrud
     {
         /// <summary>
         /// Create a new record of type T.
@@ -45,7 +44,7 @@ namespace DAL.Functions.Crud
         {
             try
             {
-                using (AppDbContext context = new AppDbContext(AppDbContext.AppDbContextOptions.DatabaseOptions))
+                using (AppDbContext context = new(AppDbContext.AppDbContextOptions.DatabaseOptions))
                 {
                     T result = await context.FindAsync<T>(entityId);
                     return result;
@@ -66,7 +65,7 @@ namespace DAL.Functions.Crud
         {
             try
             {
-                using (AppDbContext context = new AppDbContext(AppDbContext.AppDbContextOptions.DatabaseOptions))
+                using (AppDbContext context = new(AppDbContext.AppDbContextOptions.DatabaseOptions))
                 {
                     var result = await context.Set<T>().ToListAsync();
                     return result;
@@ -116,7 +115,7 @@ namespace DAL.Functions.Crud
         {
             try
             {
-                using (AppDbContext context = new AppDbContext(AppDbContext.AppDbContextOptions.DatabaseOptions))
+                using (AppDbContext context = new(AppDbContext.AppDbContextOptions.DatabaseOptions))
                 {
                     T recordToDelete = await context.FindAsync<T>(entityId);
                     if (recordToDelete != null)
@@ -134,6 +133,5 @@ namespace DAL.Functions.Crud
             }
         }
     }
-
 }
 

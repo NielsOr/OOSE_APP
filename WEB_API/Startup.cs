@@ -1,17 +1,11 @@
-using DAL;
-using LOGIC;
 using LOGIC.Implementation;
 using LOGIC.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-
 
 namespace WEB_API
 {
@@ -30,8 +24,8 @@ namespace WEB_API
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEB_API", Version = "v1" }); });
             //Custom Services
-            services.AddScoped<ILeeruitkomst_Service, Leeruitkomst_Service>();
-            services.AddScoped<IEvl_Service, Evl_Service>();
+            services.AddScoped<ILeeruitkomstService, LeeruitkomstService>();
+            services.AddScoped<IEvlService, EvlService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +41,8 @@ namespace WEB_API
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints => {
+            app.UseEndpoints(endpoints =>
+            {
                 endpoints.MapControllers();
             });
         }

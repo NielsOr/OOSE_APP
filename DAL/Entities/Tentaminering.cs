@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Entities
 {
@@ -19,7 +17,7 @@ namespace DAL.Entities
 
         [Required]
         [MaxLength(300)]
-        public string Aanmeldingstype  { get; set; }
+        public string Aanmeldingstype { get; set; }
 
         [Required]
         [MaxLength(300)]
@@ -39,7 +37,6 @@ namespace DAL.Entities
 
         //RELATIES
         // one EVL to many Tentamineringen
-
         [Required]
         public Evl Evl { get; set; }
 
@@ -48,6 +45,5 @@ namespace DAL.Entities
 
         // one Tentaminering to many Beoordelingsdimensies
         public ICollection<Beoordelingsdimensie> Beoordelingsdimensies { get; set; }
-
     }
 }
