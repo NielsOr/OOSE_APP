@@ -2,7 +2,7 @@
 
 namespace LOGIC.Models
 {
-    public class EvlModel
+    public class Evl
     {
         public int Id { get; set; }
         public string Code { get; set; }
@@ -11,7 +11,7 @@ namespace LOGIC.Models
         public double Studiepunten { get; set; }
         public string Beroepstaken { get; set; } // class voor maken?
         public string Eindkwalificaties { get; set; } // class voor maken?
-        public ICollection<LeeruitkomstModel> Leeruitkomsten { get; set; }
-        public ICollection<TentamineringModel> Tentamineringen { get; set; }
+        public List<Leeruitkomst> Leeruitkomsten { get; set; }
+        public List<Tentaminering> Tentamineringen { get; set; }
     }
 }

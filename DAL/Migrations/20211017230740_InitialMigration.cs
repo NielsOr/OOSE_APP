@@ -2,12 +2,12 @@
 
 namespace DAL.Migrations
 {
-    public partial class InitialDBCreation : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Evls",
+                name: "evl",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -21,11 +21,11 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Evls", x => x.Id);
+                    table.PrimaryKey("PK_evl", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Leeruitkomsten",
+                name: "leeruitkomst",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -36,43 +36,43 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Leeruitkomsten", x => x.Id);
+                    table.PrimaryKey("PK_leeruitkomst", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Leeruitkomsten_Evls_EvlId",
+                        name: "FK_leeruitkomst_evl_EvlId",
                         column: x => x.EvlId,
-                        principalTable: "Evls",
+                        principalTable: "evl",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tentamineringen",
+                name: "tentaminering",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Naam = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Code = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Aanmeldingstype = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    Hulpmiddelen = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
+                    Aanmeldingstype = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    Hulpmiddelen = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Weging = table.Column<int>(type: "int", nullable: false),
-                    MinimaalOordeel = table.Column<double>(type: "float", maxLength: 100, nullable: false),
-                    Tentamenvorm = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    MinimaalOordeel = table.Column<double>(type: "float", nullable: false),
+                    Tentamenvorm = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     EvlId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tentamineringen", x => x.Id);
+                    table.PrimaryKey("PK_tentaminering", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tentamineringen_Evls_EvlId",
+                        name: "FK_tentaminering_evl_EvlId",
                         column: x => x.EvlId,
-                        principalTable: "Evls",
+                        principalTable: "evl",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Beoordelingsdimensies",
+                name: "beoordelingsdimensie",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -86,11 +86,11 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Beoordelingsdimensies", x => x.Id);
+                    table.PrimaryKey("PK_beoordelingsdimensie", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Beoordelingsdimensies_Tentamineringen_TentamineringId",
+                        name: "FK_beoordelingsdimensie_tentaminering_TentamineringId",
                         column: x => x.TentamineringId,
-                        principalTable: "Tentamineringen",
+                        principalTable: "tentaminering",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -106,21 +106,21 @@ namespace DAL.Migrations
                 {
                     table.PrimaryKey("PK_LeeruitkomstTentaminering", x => new { x.LeeruitkomstenId, x.TentamineringenId });
                     table.ForeignKey(
-                        name: "FK_LeeruitkomstTentaminering_Leeruitkomsten_LeeruitkomstenId",
+                        name: "FK_LeeruitkomstTentaminering_leeruitkomst_LeeruitkomstenId",
                         column: x => x.LeeruitkomstenId,
-                        principalTable: "Leeruitkomsten",
+                        principalTable: "leeruitkomst",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_LeeruitkomstTentaminering_Tentamineringen_TentamineringenId",
+                        name: "FK_LeeruitkomstTentaminering_tentaminering_TentamineringenId",
                         column: x => x.TentamineringenId,
-                        principalTable: "Tentamineringen",
+                        principalTable: "tentaminering",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Beoordelingscriteria",
+                name: "beoordelingscriterium",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -131,28 +131,28 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Beoordelingscriteria", x => x.Id);
+                    table.PrimaryKey("PK_beoordelingscriterium", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Beoordelingscriteria_Beoordelingsdimensies_BeoordelingsdimensieId",
+                        name: "FK_beoordelingscriterium_beoordelingsdimensie_BeoordelingsdimensieId",
                         column: x => x.BeoordelingsdimensieId,
-                        principalTable: "Beoordelingsdimensies",
+                        principalTable: "beoordelingsdimensie",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Beoordelingscriteria_BeoordelingsdimensieId",
-                table: "Beoordelingscriteria",
+                name: "IX_beoordelingscriterium_BeoordelingsdimensieId",
+                table: "beoordelingscriterium",
                 column: "BeoordelingsdimensieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Beoordelingsdimensies_TentamineringId",
-                table: "Beoordelingsdimensies",
+                name: "IX_beoordelingsdimensie_TentamineringId",
+                table: "beoordelingsdimensie",
                 column: "TentamineringId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Leeruitkomsten_EvlId",
-                table: "Leeruitkomsten",
+                name: "IX_leeruitkomst_EvlId",
+                table: "leeruitkomst",
                 column: "EvlId");
 
             migrationBuilder.CreateIndex(
@@ -161,30 +161,30 @@ namespace DAL.Migrations
                 column: "TentamineringenId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tentamineringen_EvlId",
-                table: "Tentamineringen",
+                name: "IX_tentaminering_EvlId",
+                table: "tentaminering",
                 column: "EvlId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Beoordelingscriteria");
+                name: "beoordelingscriterium");
 
             migrationBuilder.DropTable(
                 name: "LeeruitkomstTentaminering");
 
             migrationBuilder.DropTable(
-                name: "Beoordelingsdimensies");
+                name: "beoordelingsdimensie");
 
             migrationBuilder.DropTable(
-                name: "Leeruitkomsten");
+                name: "leeruitkomst");
 
             migrationBuilder.DropTable(
-                name: "Tentamineringen");
+                name: "tentaminering");
 
             migrationBuilder.DropTable(
-                name: "Evls");
+                name: "evl");
         }
     }
 }

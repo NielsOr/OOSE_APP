@@ -3,16 +3,14 @@ using DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211001160653_InitialDBCreation")]
-    partial class InitialDBCreation
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,11 +18,13 @@ namespace DAL.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DAL.Entities.Beoordelingscriterium", b =>
+            modelBuilder.Entity("LOGIC.Models.Beoordelingscriterium", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("BeoordelingsdimensieId")
@@ -42,14 +42,16 @@ namespace DAL.Migrations
 
                     b.HasIndex("BeoordelingsdimensieId");
 
-                    b.ToTable("Beoordelingscriteria");
+                    b.ToTable("beoordelingscriterium");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Beoordelingsdimensie", b =>
+            modelBuilder.Entity("LOGIC.Models.Beoordelingsdimensie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Beschrijving")
@@ -79,14 +81,16 @@ namespace DAL.Migrations
 
                     b.HasIndex("TentamineringId");
 
-                    b.ToTable("Beoordelingsdimensies");
+                    b.ToTable("beoordelingsdimensie");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Evl", b =>
+            modelBuilder.Entity("LOGIC.Models.Evl", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Beroepstaken")
@@ -119,14 +123,16 @@ namespace DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Evls");
+                    b.ToTable("evl");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Leeruitkomst", b =>
+            modelBuilder.Entity("LOGIC.Models.Leeruitkomst", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Beschrijving")
@@ -146,20 +152,22 @@ namespace DAL.Migrations
 
                     b.HasIndex("EvlId");
 
-                    b.ToTable("Leeruitkomsten");
+                    b.ToTable("leeruitkomst");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Tentaminering", b =>
+            modelBuilder.Entity("LOGIC.Models.Tentaminering", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Aanmeldingstype")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -171,11 +179,10 @@ namespace DAL.Migrations
 
                     b.Property<string>("Hulpmiddelen")
                         .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<double>("MinimaalOordeel")
-                        .HasMaxLength(100)
                         .HasColumnType("float");
 
                     b.Property<string>("Naam")
@@ -185,8 +192,8 @@ namespace DAL.Migrations
 
                     b.Property<string>("Tentamenvorm")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("Weging")
                         .HasColumnType("int");
@@ -195,7 +202,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("EvlId");
 
-                    b.ToTable("Tentamineringen");
+                    b.ToTable("tentaminering");
                 });
 
             modelBuilder.Entity("LeeruitkomstTentaminering", b =>
@@ -213,9 +220,9 @@ namespace DAL.Migrations
                     b.ToTable("LeeruitkomstTentaminering");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Beoordelingscriterium", b =>
+            modelBuilder.Entity("LOGIC.Models.Beoordelingscriterium", b =>
                 {
-                    b.HasOne("DAL.Entities.Beoordelingsdimensie", "Beoordelingsdimensie")
+                    b.HasOne("LOGIC.Models.Beoordelingsdimensie", "Beoordelingsdimensie")
                         .WithMany("Beoordelingscriteria")
                         .HasForeignKey("BeoordelingsdimensieId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -224,9 +231,9 @@ namespace DAL.Migrations
                     b.Navigation("Beoordelingsdimensie");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Beoordelingsdimensie", b =>
+            modelBuilder.Entity("LOGIC.Models.Beoordelingsdimensie", b =>
                 {
-                    b.HasOne("DAL.Entities.Tentaminering", "Tentaminering")
+                    b.HasOne("LOGIC.Models.Tentaminering", "Tentaminering")
                         .WithMany("Beoordelingsdimensies")
                         .HasForeignKey("TentamineringId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -235,9 +242,9 @@ namespace DAL.Migrations
                     b.Navigation("Tentaminering");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Leeruitkomst", b =>
+            modelBuilder.Entity("LOGIC.Models.Leeruitkomst", b =>
                 {
-                    b.HasOne("DAL.Entities.Evl", "Evl")
+                    b.HasOne("LOGIC.Models.Evl", "Evl")
                         .WithMany("Leeruitkomsten")
                         .HasForeignKey("EvlId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -246,9 +253,9 @@ namespace DAL.Migrations
                     b.Navigation("Evl");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Tentaminering", b =>
+            modelBuilder.Entity("LOGIC.Models.Tentaminering", b =>
                 {
-                    b.HasOne("DAL.Entities.Evl", "Evl")
+                    b.HasOne("LOGIC.Models.Evl", "Evl")
                         .WithMany("Tentamineringen")
                         .HasForeignKey("EvlId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,32 +266,32 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("LeeruitkomstTentaminering", b =>
                 {
-                    b.HasOne("DAL.Entities.Leeruitkomst", null)
+                    b.HasOne("LOGIC.Models.Leeruitkomst", null)
                         .WithMany()
                         .HasForeignKey("LeeruitkomstenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Entities.Tentaminering", null)
+                    b.HasOne("LOGIC.Models.Tentaminering", null)
                         .WithMany()
                         .HasForeignKey("TentamineringenId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("DAL.Entities.Beoordelingsdimensie", b =>
+            modelBuilder.Entity("LOGIC.Models.Beoordelingsdimensie", b =>
                 {
                     b.Navigation("Beoordelingscriteria");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Evl", b =>
+            modelBuilder.Entity("LOGIC.Models.Evl", b =>
                 {
                     b.Navigation("Leeruitkomsten");
 
                     b.Navigation("Tentamineringen");
                 });
 
-            modelBuilder.Entity("DAL.Entities.Tentaminering", b =>
+            modelBuilder.Entity("LOGIC.Models.Tentaminering", b =>
                 {
                     b.Navigation("Beoordelingsdimensies");
                 });

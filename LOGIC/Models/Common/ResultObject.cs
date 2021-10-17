@@ -1,25 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LOGIC.Models
 {
-    //WILL BE USED AS EVERY RESULT OBJECT FROM OUR Handler METHODS
     public class ResultObject<T>
     {
         public ResultObject()
         {
-            success = false;
-            userMessage = string.Empty;
-            internalMessage = string.Empty;
-            exception = null;
+            Success = false;
+            UserMessage = string.Empty;
+            InternalMessage = string.Empty;
+            Exception = null;
         }
-        public bool success { get; set; }
-        public string userMessage { get; set; }
-        internal string internalMessage { get; set; } // As its internal the end user will not see it.
-        internal Exception exception { get; set; } // As its internal the end user will not see it.
-        public T result_set { get; set; }
+        public bool Success { get; set; }
+        public string UserMessage { get; set; }
+        internal string InternalMessage { get; set; } // As its internal the end user will not see it.
+        internal Exception Exception { get; set; } // As its internal the end user will not see it.
+        public T ResultSet { get; set; }
     }
 }
