@@ -1,4 +1,4 @@
-﻿namespace WEB_API.Controllers
+﻿namespace WEB_API.Schemas.Evl
 {
     public class UpdateEvlSchema
     {

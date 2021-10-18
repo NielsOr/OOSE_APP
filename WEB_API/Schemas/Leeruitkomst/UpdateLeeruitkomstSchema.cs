@@ -1,4 +1,4 @@
-﻿namespace WEB_API.Controllers
+﻿namespace WEB_API.Schemas.Leeruitkomst
 {
     public class UpdateLeeruitkomstSchema
     {

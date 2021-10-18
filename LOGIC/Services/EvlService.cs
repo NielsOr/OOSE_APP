@@ -11,7 +11,8 @@ namespace LOGIC.Services
     /// </summary>
     public class EvlService : IEvlService
     {
-        private IRepository _repository;
+        private readonly IRepository _repository;
+
         public EvlService(IRepository repository)
         {
             _repository = repository;
@@ -27,7 +28,7 @@ namespace LOGIC.Services
             {
                 List<Evl> evls = await _repository.ReadAll<Evl>();
                 result.UserMessage = "list of EVLs found successfully";
-                result.InternalMessage = "Evl_Service: GetEvls() method executed successfully.";
+                result.InternalMessage = "EvlService: GetEvls() method executed successfully.";
                 result.ResultSet = evls;
                 result.Success = true;
             }
@@ -35,7 +36,7 @@ namespace LOGIC.Services
             {
                 result.Exception = exception;
                 result.UserMessage = "failed to retrieve list of EVLs.";
-                result.InternalMessage = $"ERROR: Evl_Service: GetEvls(): {exception.Message}";
+                result.InternalMessage = $"ERROR: EvlService: GetEvls(): {exception.Message}";
             }
             return result;
         }
@@ -50,7 +51,7 @@ namespace LOGIC.Services
             {
                 Evl evl = await _repository.Read<Evl>(id);
                 result.UserMessage = $"EVL {evl.Naam} found successfully";
-                result.InternalMessage = "Evl_Service: GetEvlById() method executed successfully.";
+                result.InternalMessage = "EvlService: GetEvlById() method executed successfully.";
                 result.ResultSet = evl;
                 result.Success = true;
             }
@@ -58,7 +59,7 @@ namespace LOGIC.Services
             {
                 result.Exception = exception;
                 result.UserMessage = "failed to find the EVL.";
-                result.InternalMessage = $"ERROR: Evl_Service: GetEvlById(): {exception.Message}";
+                result.InternalMessage = $"ERROR: EvlService: GetEvlById(): {exception.Message}";
             }
             return result;
         }
@@ -82,7 +83,7 @@ namespace LOGIC.Services
                 };
                 evl = await _repository.Create(evl);
                 result.UserMessage = $"EVL {evl.Naam} added successfully";
-                result.InternalMessage = "Evl_Service: AddEvl() method executed successfully.";
+                result.InternalMessage = "EvlService: AddEvl() method executed successfully.";
                 result.ResultSet = evl;
                 result.Success = true;
             }
@@ -90,7 +91,7 @@ namespace LOGIC.Services
             {
                 result.Exception = exception;
                 result.UserMessage = "failed to add the EVL.";
-                result.InternalMessage = $"ERROR: Evl_Service: AddEvl(): {exception.Message}";
+                result.InternalMessage = $"ERROR: EvlService: AddEvl(): {exception.Message}";
             }
             return result;
         }
@@ -115,7 +116,7 @@ namespace LOGIC.Services
                 };
                 evl = await _repository.Update(evl, id);
                 result.UserMessage = $"EVL {evl.Naam} updated successfully";
-                result.InternalMessage = "Evl_Service: UpdateEvl() method executed successfully.";
+                result.InternalMessage = "EvlService: UpdateEvl() method executed successfully.";
                 result.ResultSet = evl;
                 result.Success = true;
             }
@@ -123,7 +124,7 @@ namespace LOGIC.Services
             {
                 result.Exception = exception;
                 result.UserMessage = "failed to update the EVL.";
-                result.InternalMessage = $"ERROR: Evl_Service: UpdateEvl(): {exception.Message}";
+                result.InternalMessage = $"ERROR: EvlService: UpdateEvl(): {exception.Message}";
             }
             return result;
         }
@@ -138,7 +139,7 @@ namespace LOGIC.Services
             {
                 bool isDeleted = await _repository.Delete<Evl>(id);
                 result.UserMessage = $"EVL deleted successfully";
-                result.InternalMessage = "Evl_Service: DeleteEvl() method executed successfully.";
+                result.InternalMessage = "EvlService: DeleteEvl() method executed successfully.";
                 result.ResultSet = null;
                 result.Success = true;
             }
@@ -146,10 +147,9 @@ namespace LOGIC.Services
             {
                 result.Exception = exception;
                 result.UserMessage = "failed to delete the EVL.";
-                result.InternalMessage = $"ERROR: Evl_Service: DeleteEvl(): {exception.Message}";
+                result.InternalMessage = $"ERROR: EvlService: DeleteEvl(): {exception.Message}";
             }
             return result;
         }
-
     }
 }
