@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DAL.Services.Crud
+namespace DAL.Repositories
 {
     /// <summary>
     /// Generic based CRUD methods, Create, Read, Update, Delete methods.
@@ -12,6 +12,7 @@ namespace DAL.Services.Crud
     public class Repository : IRepository
     {
         private readonly AppDbContext _dbContext;
+
         public Repository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -94,6 +95,5 @@ namespace DAL.Services.Crud
             }
         }
     }
-
 }
 

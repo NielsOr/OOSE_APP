@@ -16,6 +16,5 @@ namespace LOGIC.Models
         public Evl Evl { get; set; }
         public List<Leeruitkomst> Leeruitkomsten { get; set; }
         public List<Beoordelingsdimensie> Beoordelingsdimensies { get; set; }
-
     }
 }

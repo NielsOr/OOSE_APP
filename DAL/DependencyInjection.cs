@@ -1,5 +1,5 @@
 ﻿using DAL.Context;
-using DAL.Services.Crud;
+using DAL.Repositories;
 using LOGIC.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

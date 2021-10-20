@@ -10,6 +10,5 @@ namespace LOGIC.Models
         public int EvlId { get; set; }
         public Evl Evl { get; set; }
         public List<Tentaminering> Tentamineringen { get; set; }
-
     }
 }
