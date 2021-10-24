@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace LOGIC.Interfaces
 {
-    public interface IRepository
+    public interface ICrudRepository
     {
         Task<T> Create<T>(T objectForDb) where T : class;
         Task<T> Read<T>(int entityId) where T : class;

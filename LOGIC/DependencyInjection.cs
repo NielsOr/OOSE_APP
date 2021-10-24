@@ -1,4 +1,5 @@
 ﻿using LOGIC.Interfaces;
+using LOGIC.Interfaces.Services;
 using LOGIC.Services;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -20,11 +20,14 @@ namespace WEB_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEB_API", Version = "v1" }); });
             //add services from other layers.
             services.AddInfrastructure(Configuration);
             services.AddLogic();
+            services.AddAutoMapper(typeof(Startup));
 
         }
 
@@ -45,6 +48,7 @@ namespace WEB_API
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }

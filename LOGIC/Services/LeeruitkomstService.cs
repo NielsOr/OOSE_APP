@@ -1,6 +1,8 @@
 ﻿using LOGIC.Interfaces;
+using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LOGIC.Services
@@ -10,9 +12,9 @@ namespace LOGIC.Services
     /// </summary>
     public class LeeruitkomstService : ILeeruitkomstService
     {
-        private readonly IRepository _repository;
+        private readonly ILeeruitkomstRepository _repository;
 
-        public LeeruitkomstService(IRepository repository)
+        public LeeruitkomstService(ILeeruitkomstRepository repository)
         {
             _repository = repository;
         }
@@ -20,23 +22,19 @@ namespace LOGIC.Services
         //Add Leeruitkomst Entiteit in de database
         //Indien geslaagd: geef ResultObject met Leeruitkomst en succesmelding terug aan de controller
         //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Leeruitkomst>> AddLeeruitkomst(int evlId, string naam, string beschrijving)
+        public async Task<ResultObject<Leeruitkomst>> AddLeeruitkomst(Leeruitkomst leeruitkomst)
         {
             ResultObject<Leeruitkomst> result = new();
             try
             {
-                Leeruitkomst leeruitkomst = new() { Naam = naam, EvlId = evlId, Beschrijving = beschrijving };
                 leeruitkomst = await _repository.Create(leeruitkomst);
-                result.UserMessage = $"Leeruitkomst {leeruitkomst.Naam} added successfully";
-                result.InternalMessage = "LeeruitkomstService: AddLeeruitkomst() method executed successfully.";
                 result.ResultSet = leeruitkomst;
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "Failed to add Leeruitkomst.";
-                result.InternalMessage = $"ERROR: LeeruitkomstService: AddLeeruitkomst(): {exception.Message}";
+                result.Message = "Failed to add Leeruitkomst.";
             }
             return result;
         }
@@ -50,42 +48,55 @@ namespace LOGIC.Services
             try
             {
                 Leeruitkomst leeruitkomst = await _repository.Read<Leeruitkomst>(leeruitkomstId);
-                result.UserMessage = $"Leeruitkomst {leeruitkomst.Naam} found successfully";
-                result.InternalMessage = "LeeruitkomstService: GetLeeruitkomstById() method executed successfully.";
                 result.ResultSet = leeruitkomst;
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "Failed to get Leeruitkomst.";
-                result.InternalMessage = $"ERROR: LeeruitkomstService: GetLeeruitkomstById(): {exception.Message}";
+                result.Message = "Failed to get Leeruitkomst.";
             }
             return result;
         }
 
-        //update Leeruitkomst Entiteit in de database
-        //Indien geslaagd: geef ResultObject met Leeruitkomst en succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Leeruitkomst>> UpdateLeeruitkomst(int leeruitkomstId, string naam, string beschrijving)
+
+        public async Task<ResultObject<List<Leeruitkomst>>> GetLeeruitkomstenByEvlId(int evlId)
         {
-            ResultObject<Leeruitkomst> result = new();
+            ResultObject<List<Leeruitkomst>> result = new();
             try
             {
-                Leeruitkomst leeruitkomst = await _repository.Read<Leeruitkomst>(leeruitkomstId);
-                leeruitkomst.Naam = naam;
-                leeruitkomst.Beschrijving = beschrijving;
-                leeruitkomst = await _repository.Update(leeruitkomst, leeruitkomstId);
-                result.UserMessage = $"Leeruitkomst {leeruitkomst.Naam} updated successfully";
-                result.InternalMessage = "LeeruitkomstService: UpdateLeeruitkomst() method executed successfully.";
-                result.ResultSet = leeruitkomst;
+                List<Leeruitkomst> leeruitkomsten = await _repository.GetLeeruitkomstenByEvlId(evlId);
+                result.ResultSet = leeruitkomsten;
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "Failed to update Leeruitkomst.";
-                result.InternalMessage = $"ERROR: LeeruitkomstService: UpdateLeeruitkomst(): {exception.Message}";
+                result.Message = "failed to find the EVL.";
+            }
+            return result;
+        }
+
+
+        //update Leeruitkomst Entiteit in de database
+        //Indien geslaagd: geef ResultObject met Leeruitkomst en succesmelding terug aan de controller
+        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
+        public async Task<ResultObject<Leeruitkomst>> UpdateLeeruitkomst(Leeruitkomst leeruitkomst)
+        {
+            ResultObject<Leeruitkomst> result = new();
+            try
+            {
+                Leeruitkomst existingLeeruitkomst = await _repository.Read<Leeruitkomst>(leeruitkomst.Id);
+                existingLeeruitkomst.Naam = leeruitkomst.Naam;
+                existingLeeruitkomst.Beschrijving = leeruitkomst.Beschrijving;
+                leeruitkomst = await _repository.Update(existingLeeruitkomst, existingLeeruitkomst.Id);
+                result.ResultSet = existingLeeruitkomst;
+                result.Success = true;
+            }
+            catch (Exception exception)
+            {
+                result.Exception = exception;
+                result.Message = "Failed to update Leeruitkomst.";
             }
             return result;
         }
@@ -99,16 +110,13 @@ namespace LOGIC.Services
             try
             {
                 bool isDeleted = await _repository.Delete<Leeruitkomst>(id);
-                result.UserMessage = $"Leeruitkomst deleted successfully";
-                result.InternalMessage = "LeeruitkomstService: DeleteLeeruitkomst() method executed successfully.";
-                result.ResultSet = null;
+                result.Message = "Succesfully deleted Leeruitkomst.";
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "Failed to delete Leeruitkomst.";
-                result.InternalMessage = $"ERROR: LeeruitkomstService: DeleteLeeruitkomst(): {exception.Message}";
+                result.Message = "Failed to delete Leeruitkomst.";
             }
             return result;
         }

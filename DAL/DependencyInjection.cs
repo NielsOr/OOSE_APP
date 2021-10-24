@@ -16,7 +16,9 @@ namespace DAL
                     configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
 
-            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IEvlRepository, EvlRepository>();
+            services.AddScoped<ITentamineringRepository, TentamineringRepository>();
+            services.AddScoped<ILeeruitkomstRepository, LeeruitkomstRepository>();
 
             return services;
         }

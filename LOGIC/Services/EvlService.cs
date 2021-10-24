@@ -1,4 +1,5 @@
 ﻿using LOGIC.Interfaces;
+using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace LOGIC.Services
     /// </summary>
     public class EvlService : IEvlService
     {
-        private readonly IRepository _repository;
+        private readonly IEvlRepository _repository;
 
-        public EvlService(IRepository repository)
+        public EvlService(IEvlRepository repository)
         {
             _repository = repository;
         }
@@ -27,16 +28,13 @@ namespace LOGIC.Services
             try
             {
                 List<Evl> evls = await _repository.ReadAll<Evl>();
-                result.UserMessage = "list of EVLs found successfully";
-                result.InternalMessage = "EvlService: GetEvls() method executed successfully.";
                 result.ResultSet = evls;
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "failed to retrieve list of EVLs.";
-                result.InternalMessage = $"ERROR: EvlService: GetEvls(): {exception.Message}";
+                result.Message = "failed to retrieve list of EVLs.";
             }
             return result;
         }
@@ -49,49 +47,35 @@ namespace LOGIC.Services
             ResultObject<Evl> result = new();
             try
             {
-                Evl evl = await _repository.Read<Evl>(id);
-                result.UserMessage = $"EVL {evl.Naam} found successfully";
-                result.InternalMessage = "EvlService: GetEvlById() method executed successfully.";
+                Evl evl = await _repository.GetEvlById(id);
                 result.ResultSet = evl;
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "failed to find the EVL.";
-                result.InternalMessage = $"ERROR: EvlService: GetEvlById(): {exception.Message}";
+                result.Message = "failed to find the EVL.";
             }
             return result;
         }
 
+        
         //add Evl aan de database
         //Indien geslaagd: geef ResultObject met Evl en succesmelding terug aan de controller
         //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Evl>> AddEvl(string code, string naam, string beroepstaken, string eindkwalificaties, string beschrijving, double studiepunten)
+        public async Task<ResultObject<Evl>> AddEvl(Evl evl)
         {
             ResultObject<Evl> result = new();
             try
             {
-                Evl evl = new()
-                {
-                    Code = code,
-                    Naam = naam,
-                    Beroepstaken = beroepstaken,
-                    Eindkwalificaties = eindkwalificaties,
-                    Beschrijving = beschrijving,
-                    Studiepunten = studiepunten,
-                };
                 evl = await _repository.Create(evl);
-                result.UserMessage = $"EVL {evl.Naam} added successfully";
-                result.InternalMessage = "EvlService: AddEvl() method executed successfully.";
                 result.ResultSet = evl;
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "failed to add the EVL.";
-                result.InternalMessage = $"ERROR: EvlService: AddEvl(): {exception.Message}";
+                result.Message = "failed to add the EVL.";
             }
             return result;
         }
@@ -99,32 +83,19 @@ namespace LOGIC.Services
         //update Evl in de database
         //Indien geslaagd: geef ResultObject met Evl en succesmelding terug aan de controller
         //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Evl>> UpdateEvl(int id, string code, string naam, string beroepstaken, string eindkwalificaties, string beschrijving, double studiepunten)
+        public async Task<ResultObject<Evl>> UpdateEvl(Evl evl)
         {
             ResultObject<Evl> result = new();
             try
             {
-                Evl evl = new()
-                {
-                    Id = id,
-                    Code = code,
-                    Naam = naam,
-                    Beroepstaken = beroepstaken,
-                    Eindkwalificaties = eindkwalificaties,
-                    Beschrijving = beschrijving,
-                    Studiepunten = studiepunten,
-                };
-                evl = await _repository.Update(evl, id);
-                result.UserMessage = $"EVL {evl.Naam} updated successfully";
-                result.InternalMessage = "EvlService: UpdateEvl() method executed successfully.";
+                evl = await _repository.Update(evl, evl.Id);
                 result.ResultSet = evl;
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "failed to update the EVL.";
-                result.InternalMessage = $"ERROR: EvlService: UpdateEvl(): {exception.Message}";
+                result.Message = "failed to update the EVL.";
             }
             return result;
         }
@@ -138,18 +109,17 @@ namespace LOGIC.Services
             try
             {
                 bool isDeleted = await _repository.Delete<Evl>(id);
-                result.UserMessage = $"EVL deleted successfully";
-                result.InternalMessage = "EvlService: DeleteEvl() method executed successfully.";
-                result.ResultSet = null;
+                result.Message = "Succesfully deleted EVL.";
                 result.Success = true;
             }
             catch (Exception exception)
             {
                 result.Exception = exception;
-                result.UserMessage = "failed to delete the EVL.";
-                result.InternalMessage = $"ERROR: EvlService: DeleteEvl(): {exception.Message}";
+                result.Message = "failed to delete the EVL.";
             }
             return result;
         }
+
+
     }
 }
