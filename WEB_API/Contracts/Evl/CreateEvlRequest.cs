@@ -1,6 +1,6 @@
-﻿namespace WEB_API.Schemas.Evl
+﻿namespace WEB_API.Contracts.Evl
 {
-    public class CreateEvlSchema
+    public class CreateEvlRequest
     {
         public string Code { get; set; }
         public string Naam { get; set; }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20211017230740_InitialMigration")]
+    [Migration("20211202210344_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,72 +19,6 @@ namespace DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("LOGIC.Models.Beoordelingscriterium", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("BeoordelingsdimensieId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Beschrijving")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<int>("Oordeel")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BeoordelingsdimensieId");
-
-                    b.ToTable("beoordelingscriterium");
-                });
-
-            modelBuilder.Entity("LOGIC.Models.Beoordelingsdimensie", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Beschrijving")
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<double>("MinimaalOordeel")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Naam")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<int>("TentamineringId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Weging")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TentamineringId");
-
-                    b.ToTable("beoordelingsdimensie");
-                });
 
             modelBuilder.Entity("LOGIC.Models.Evl", b =>
                 {
@@ -157,6 +91,72 @@ namespace DAL.Migrations
                     b.ToTable("leeruitkomst");
                 });
 
+            modelBuilder.Entity("LOGIC.Models.Rubric", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beschrijving")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<double>("MinimaalOordeel")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Naam")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("TentamineringId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Weging")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TentamineringId");
+
+                    b.ToTable("rubric");
+                });
+
+            modelBuilder.Entity("LOGIC.Models.RubricCriterium", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beschrijving")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<int>("Oordeel")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RubricId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RubricId");
+
+                    b.ToTable("rubric_criterium");
+                });
+
             modelBuilder.Entity("LOGIC.Models.Tentaminering", b =>
                 {
                     b.Property<int>("Id")
@@ -207,83 +207,86 @@ namespace DAL.Migrations
                     b.ToTable("tentaminering");
                 });
 
-            modelBuilder.Entity("LeeruitkomstTentaminering", b =>
+            modelBuilder.Entity("LOGIC.Models.TentamineringLeeruitkomst", b =>
                 {
-                    b.Property<int>("LeeruitkomstenId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beoordelingcriteria")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<int>("LeeruitkomstId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TentamineringenId")
+                    b.Property<int>("TentamineringId")
                         .HasColumnType("int");
 
-                    b.HasKey("LeeruitkomstenId", "TentamineringenId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("TentamineringenId");
+                    b.HasIndex("LeeruitkomstId");
 
-                    b.ToTable("LeeruitkomstTentaminering");
-                });
+                    b.HasIndex("TentamineringId");
 
-            modelBuilder.Entity("LOGIC.Models.Beoordelingscriterium", b =>
-                {
-                    b.HasOne("LOGIC.Models.Beoordelingsdimensie", "Beoordelingsdimensie")
-                        .WithMany("Beoordelingscriteria")
-                        .HasForeignKey("BeoordelingsdimensieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Beoordelingsdimensie");
-                });
-
-            modelBuilder.Entity("LOGIC.Models.Beoordelingsdimensie", b =>
-                {
-                    b.HasOne("LOGIC.Models.Tentaminering", "Tentaminering")
-                        .WithMany("Beoordelingsdimensies")
-                        .HasForeignKey("TentamineringId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Tentaminering");
+                    b.ToTable("tentaminering_leeruitkomst");
                 });
 
             modelBuilder.Entity("LOGIC.Models.Leeruitkomst", b =>
                 {
-                    b.HasOne("LOGIC.Models.Evl", "Evl")
+                    b.HasOne("LOGIC.Models.Evl", null)
                         .WithMany("Leeruitkomsten")
                         .HasForeignKey("EvlId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Evl");
+            modelBuilder.Entity("LOGIC.Models.Rubric", b =>
+                {
+                    b.HasOne("LOGIC.Models.Tentaminering", null)
+                        .WithMany("Rubrics")
+                        .HasForeignKey("TentamineringId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("LOGIC.Models.RubricCriterium", b =>
+                {
+                    b.HasOne("LOGIC.Models.Rubric", null)
+                        .WithMany("Beoordelingscriteria")
+                        .HasForeignKey("RubricId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("LOGIC.Models.Tentaminering", b =>
                 {
-                    b.HasOne("LOGIC.Models.Evl", "Evl")
+                    b.HasOne("LOGIC.Models.Evl", null)
                         .WithMany("Tentamineringen")
                         .HasForeignKey("EvlId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Evl");
                 });
 
-            modelBuilder.Entity("LeeruitkomstTentaminering", b =>
+            modelBuilder.Entity("LOGIC.Models.TentamineringLeeruitkomst", b =>
                 {
-                    b.HasOne("LOGIC.Models.Leeruitkomst", null)
+                    b.HasOne("LOGIC.Models.Leeruitkomst", "Leeruitkomst")
                         .WithMany()
-                        .HasForeignKey("LeeruitkomstenId")
+                        .HasForeignKey("LeeruitkomstId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("LOGIC.Models.Tentaminering", null)
-                        .WithMany()
-                        .HasForeignKey("TentamineringenId")
+                        .WithMany("Leeruitkomsten")
+                        .HasForeignKey("TentamineringId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
 
-            modelBuilder.Entity("LOGIC.Models.Beoordelingsdimensie", b =>
-                {
-                    b.Navigation("Beoordelingscriteria");
+                    b.Navigation("Leeruitkomst");
                 });
 
             modelBuilder.Entity("LOGIC.Models.Evl", b =>
@@ -293,9 +296,16 @@ namespace DAL.Migrations
                     b.Navigation("Tentamineringen");
                 });
 
+            modelBuilder.Entity("LOGIC.Models.Rubric", b =>
+                {
+                    b.Navigation("Beoordelingscriteria");
+                });
+
             modelBuilder.Entity("LOGIC.Models.Tentaminering", b =>
                 {
-                    b.Navigation("Beoordelingsdimensies");
+                    b.Navigation("Leeruitkomsten");
+
+                    b.Navigation("Rubrics");
                 });
 #pragma warning restore 612, 618
         }

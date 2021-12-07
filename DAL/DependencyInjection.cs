@@ -1,6 +1,8 @@
 ﻿using DAL.Context;
+using DAL.Files;
 using DAL.Repositories;
-using LOGIC.Interfaces;
+using LOGIC.Interfaces.Files;
+using LOGIC.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,8 @@ namespace DAL
             services.AddScoped<IEvlRepository, EvlRepository>();
             services.AddScoped<ITentamineringRepository, TentamineringRepository>();
             services.AddScoped<ILeeruitkomstRepository, LeeruitkomstRepository>();
+            services.AddScoped<IRubricRepository, RubricRepository>();
+            services.AddScoped<IRubricsFileBuilder, RubricsFileBuilder>();
 
             return services;
         }

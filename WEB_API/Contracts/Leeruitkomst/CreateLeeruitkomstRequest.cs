@@ -1,6 +1,6 @@
-﻿namespace WEB_API.Schemas.Leeruitkomst
+﻿namespace WEB_API.Contracts.Leeruitkomst
 {
-    public class CreateLeeruitkomstSchema
+    public class CreateLeeruitkomstRequest
     {
         public int EvlId { get; set; }
         public string Naam { get; set; }

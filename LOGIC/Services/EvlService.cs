@@ -1,4 +1,4 @@
-﻿using LOGIC.Interfaces;
+﻿using LOGIC.Interfaces.Repositories;
 using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using System;
@@ -13,63 +13,19 @@ namespace LOGIC.Services
     public class EvlService : IEvlService
     {
         private readonly IEvlRepository _repository;
+        
 
         public EvlService(IEvlRepository repository)
         {
             _repository = repository;
         }
 
-        //get alle Evls uit de database
-        //Indien geslaagd: geef ResultObject met List<Evl> en succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<List<Evl>>> GetEvls()
-        {
-            ResultObject<List<Evl>> result = new();
-            try
-            {
-                List<Evl> evls = await _repository.ReadAll<Evl>();
-                result.ResultSet = evls;
-                result.Success = true;
-            }
-            catch (Exception exception)
-            {
-                result.Exception = exception;
-                result.Message = "failed to retrieve list of EVLs.";
-            }
-            return result;
-        }
-
-        //get Evl uit de database
-        //Indien geslaagd: geef ResultObject met Evl en succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Evl>> GetEvlById(int id)
+        public async Task<ResultObject<Evl>> CreateEvl(Evl evl)
         {
             ResultObject<Evl> result = new();
             try
             {
-                Evl evl = await _repository.GetEvlById(id);
-                result.ResultSet = evl;
-                result.Success = true;
-            }
-            catch (Exception exception)
-            {
-                result.Exception = exception;
-                result.Message = "failed to find the EVL.";
-            }
-            return result;
-        }
-
-        
-        //add Evl aan de database
-        //Indien geslaagd: geef ResultObject met Evl en succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Evl>> AddEvl(Evl evl)
-        {
-            ResultObject<Evl> result = new();
-            try
-            {
-                evl = await _repository.Create(evl);
-                result.ResultSet = evl;
+                result.ResultSet = await _repository.Create(evl);
                 result.Success = true;
             }
             catch (Exception exception)
@@ -80,16 +36,42 @@ namespace LOGIC.Services
             return result;
         }
 
-        //update Evl in de database
-        //Indien geslaagd: geef ResultObject met Evl en succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Evl>> UpdateEvl(Evl evl)
+        public async Task<ResultObject<Evl>> ReadEvl(int id)
         {
             ResultObject<Evl> result = new();
             try
             {
-                evl = await _repository.Update(evl, evl.Id);
-                result.ResultSet = evl;
+                result.ResultSet = await _repository.Read(id);
+                result.Success = true;
+            }
+            catch (Exception exception)
+            {
+                result.Exception = exception;
+                result.Message = "failed to find the EVL.";
+            }
+            return result;
+        }
+        public async Task<ResultObject<List<Evl>>> ReadAllEvls()
+        {
+            ResultObject<List<Evl>> result = new();
+            try
+            {
+                result.ResultSet = await _repository.ReadAll();
+                result.Success = true;
+            }
+            catch (Exception exception)
+            {
+                result.Exception = exception;
+                result.Message = "failed to retrieve list of EVLs.";
+            }
+            return result;
+        }
+        public async Task<ResultObject<Evl>> UpdateEvl(int id, Evl evl)
+        {
+            ResultObject<Evl> result = new();
+            try
+            {
+                result.ResultSet = await _repository.Update(id, evl);
                 result.Success = true;
             }
             catch (Exception exception)
@@ -100,15 +82,12 @@ namespace LOGIC.Services
             return result;
         }
 
-        //Delete Evl Entiteit in de database
-        //Indien geslaagd: geef ResultObject met succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Evl>> DeleteEvl(int id)
+        public async Task<ResultObject<bool>> DeleteEvl(int id)
         {
-            ResultObject<Evl> result = new();
+            ResultObject<bool> result = new();
             try
             {
-                bool isDeleted = await _repository.Delete<Evl>(id);
+                bool isDeleted = await _repository.Delete(id);
                 result.Message = "Succesfully deleted EVL.";
                 result.Success = true;
             }
@@ -119,6 +98,8 @@ namespace LOGIC.Services
             }
             return result;
         }
+
+        
 
 
     }

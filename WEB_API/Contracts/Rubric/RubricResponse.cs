@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using WEB_API.Schemas.Leeruitkomst;
+using WEB_API.Contracts.RubricCriterium;
 
-namespace WEB_API.Schemas.Evl
+namespace WEB_API.Contracts.Rubric
 {
-    public class EvlResponse
+    public class RubricResponse
     {
         public int Id { get; set; }
         public string Code { get; set; }
@@ -12,6 +12,6 @@ namespace WEB_API.Schemas.Evl
         public double Studiepunten { get; set; }
         public string Beroepstaken { get; set; }
         public string Eindkwalificaties { get; set; }
-        public IEnumerable<LeeruitkomstResponse> Leeruitkomsten { get; set; }
+        public IEnumerable<RubricCriteriumContract> Beoordelingscriteria { get; set; }
     }
 }

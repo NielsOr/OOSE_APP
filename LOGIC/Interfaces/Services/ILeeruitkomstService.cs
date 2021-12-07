@@ -6,10 +6,9 @@ namespace LOGIC.Interfaces.Services
 {
     public interface ILeeruitkomstService
     {
-        Task<ResultObject<Leeruitkomst>> AddLeeruitkomst(Leeruitkomst leeruitkomst);
-        Task<ResultObject<Leeruitkomst>> GetLeeruitkomstById(int leeruitkomstId);
-        Task<ResultObject<Leeruitkomst>> UpdateLeeruitkomst(Leeruitkomst leeruitkomst);
-        Task<ResultObject<Leeruitkomst>> DeleteLeeruitkomst(int leeruitkomstId);
-        Task<ResultObject<List<Leeruitkomst>>> GetLeeruitkomstenByEvlId(int evlId);
+        Task<ResultObject<Leeruitkomst>> CreateLeeruitkomst(Leeruitkomst leeruitkomst);
+        Task<ResultObject<Leeruitkomst>> ReadLeeruitkomst(int leeruitkomstId);
+        Task<ResultObject<Leeruitkomst>> UpdateLeeruitkomst(int id, Leeruitkomst leeruitkomst);
+        Task<ResultObject<bool>> DeleteLeeruitkomst(int leeruitkomstId);
     }
 }

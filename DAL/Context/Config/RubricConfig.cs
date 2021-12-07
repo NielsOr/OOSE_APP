@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DAL.Context.Config
 {
-    public class BeoordelingsdimensieConfig : IEntityTypeConfiguration<Beoordelingsdimensie>
+    public class RubricConfig : IEntityTypeConfiguration<Rubric>
     {
-        public void Configure(EntityTypeBuilder<Beoordelingsdimensie> builder)
+        public void Configure(EntityTypeBuilder<Rubric> builder)
         {
             //TABLE
-            builder.ToTable("beoordelingsdimensie");
+            builder.ToTable("rubric");
             //PK
             builder.HasKey(dimensie => dimensie.Id);
             builder.Property(dimensie => dimensie.Id).UseIdentityColumn(1, 1).IsRequired();

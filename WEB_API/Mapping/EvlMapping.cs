@@ -1,19 +1,15 @@
 ﻿using AutoMapper;
 using LOGIC.Models;
-using System;
-using WEB_API.Schemas.Evl;
+using WEB_API.Contracts.Evl;
 
 namespace WEB_API.Mapping
 {
-    public class LeeruitkomstMapping : Profile
+    public class EvlMapping : Profile
     {
-        public LeeruitkomstMapping()
+        public EvlMapping()
         {
-            CreateMap<CreateEvlSchema, Evl>();
-            CreateMap<UpdateEvlSchema, Evl>();
             CreateMap<Evl, EvlResponse>();
-            CreateMap<Evl, BasicEvlResponse>();
-
+            CreateMap<CreateEvlRequest, Evl>();
         }
     }
 }

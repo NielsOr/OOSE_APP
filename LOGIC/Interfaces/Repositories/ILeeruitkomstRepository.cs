@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LOGIC.Interfaces
+namespace LOGIC.Interfaces.Repositories
 {
-    public interface ILeeruitkomstRepository : ICrudRepository
+    public interface ILeeruitkomstRepository
     {
-        Task<List<Leeruitkomst>> GetLeeruitkomstenByEvlId(int evlId);
+        Task<Leeruitkomst> Create(Leeruitkomst evl);
+        Task<Leeruitkomst> Read(int id);
+        Task<Leeruitkomst> Update(Leeruitkomst objectToUpdate, int id);
+        Task<bool> Delete(int id);
+
     }
 }

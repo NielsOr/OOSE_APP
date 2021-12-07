@@ -6,10 +6,10 @@ namespace LOGIC.Interfaces.Services
 {
     public interface ITentamineringService
     {
-        Task<ResultObject<Tentaminering>> AddTentaminering(int evlId, string naam, string beschrijving);
-        Task<ResultObject<Tentaminering>> GetTentamineringById(int tentamineringId);
-        Task<ResultObject<Tentaminering>> UpdateTentaminering(int tentamineringId, string naam, string beschrijving);
-        Task<ResultObject<Tentaminering>> DeleteTentaminering(int tentamineringId);
-        Task<ResultObject<List<Tentaminering>>> GetTentamineringenByEvlId(int evlId);
+        Task<ResultObject<Tentaminering>> CreateTentaminering(Tentaminering tentaminering);
+        Task<ResultObject<Tentaminering>> ReadTentaminering(int id);
+        Task<ResultObject<Tentaminering>> UpdateTentaminering(int id, Tentaminering tentaminering);
+        Task<ResultObject<bool>> DeleteTentaminering(int id);
+        Task<ResultObject<FileResultObject>> DownloadRubrics(int id, int contentType);
     }
 }

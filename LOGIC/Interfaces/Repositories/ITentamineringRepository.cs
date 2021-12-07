@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LOGIC.Interfaces
+namespace LOGIC.Interfaces.Repositories
 {
-    public interface ITentamineringRepository : ICrudRepository
+    public interface ITentamineringRepository
     {
-        Task<List<Tentaminering>> GetTentamineringenByEvlId(int evlId);
+        Task<Tentaminering> Create(Tentaminering tentaminering);
+        Task<Tentaminering> Read(int id);
+        Task<Tentaminering> Update(int id, Tentaminering objectToUpdate);
+        Task<bool> Delete(int id);
+        
     }
 }

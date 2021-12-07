@@ -5,7 +5,7 @@ using LOGIC.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using WEB_API.Schemas.Leeruitkomst;
+using WEB_API.Contracts.Leeruitkomst;
 
 namespace WEB_API.Controllers
 {
@@ -22,44 +22,44 @@ namespace WEB_API.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetLeeruitkomstById(int id)
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> CreateLeeruitkomst(CreateLeeruitkomstRequest request)
         {
-            var result = await _leeruitkomstService.GetLeeruitkomstById(id);
+            var result = await _leeruitkomstService.CreateLeeruitkomst(_mapper.Map<Leeruitkomst>(request));
             return result.Success == true ? Ok(_mapper.Map<LeeruitkomstResponse>(result.ResultSet)) : StatusCode(500, result.Message);
         }
 
         [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetLeeruitkomstenByEvlId(int evlId)
+        [Route("{id?}")]
+        public async Task<IActionResult> ReadLeeruitkomst(int id)
         {
-            var result = await _leeruitkomstService.GetLeeruitkomstenByEvlId(evlId);
-            return result.Success == true ? Ok(_mapper.Map<List<LeeruitkomstResponse>>(result.ResultSet)) : StatusCode(500, result.Message);
-        }
-
-        [HttpPost]
-        [Route("[action]")]
-        public async Task<IActionResult> AddLeeruitkomst(CreateLeeruitkomstSchema schema)
-        {
-            var result = await _leeruitkomstService.AddLeeruitkomst(_mapper.Map<Leeruitkomst>(schema));
+            var result = await _leeruitkomstService.ReadLeeruitkomst(id);
             return result.Success == true ? Ok(_mapper.Map<LeeruitkomstResponse>(result.ResultSet)) : StatusCode(500, result.Message);
         }
 
         [HttpPut]
-        [Route("[action]")]
-        public async Task<IActionResult> UpdateLeeruitkomst(UpdateLeeruitkomstSchema schema)
+        [Route("{id?}")]
+        public async Task<IActionResult> UpdateLeeruitkomst(int id, UpdateLeeruitkomstRequest request)
         {
-            var result = await _leeruitkomstService.UpdateLeeruitkomst(_mapper.Map<Leeruitkomst>(schema));
-            return result.Success == true ? Ok(_mapper.Map<LeeruitkomstResponse>(result.ResultSet)) : StatusCode(500, result.Message);
+            var result = await _leeruitkomstService.UpdateLeeruitkomst(id, _mapper.Map<Leeruitkomst>(request));
+            return result.Success == true ? Ok(_mapper.Map<LeeruitkomstResponse>(result.ResultSet)) : NoContent();
         }
 
         [HttpDelete]
-        [Route("[action]")]
+        [Route("{id?}")]
         public async Task<IActionResult> DeleteLeeruitkomst(int id)
         {
             var result = await _leeruitkomstService.DeleteLeeruitkomst(id);
             return result.Success == true ? Ok(result.Message) : StatusCode(500, result.Message);
         }
+
+        /*[HttpGet]
+        [Route("Evl/{evlId?}")]
+        public async Task<IActionResult> GetLeeruitkomstenByEvlId(int evlId)
+        {
+            var result = await _leeruitkomstService.GetLeeruitkomstenByEvlId(evlId);
+            return result.Success == true ? Ok(_mapper.Map<List<LeeruitkomstSchema>>(result.ResultSet)) : StatusCode(500, result.Message);
+        }*/
     }
 }

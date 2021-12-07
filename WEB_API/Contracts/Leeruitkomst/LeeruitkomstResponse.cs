@@ -1,4 +1,4 @@
-﻿namespace WEB_API.Schemas.Leeruitkomst
+﻿namespace WEB_API.Contracts.Leeruitkomst
 {
     public class LeeruitkomstResponse
     {

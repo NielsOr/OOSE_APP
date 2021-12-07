@@ -1,4 +1,5 @@
 ﻿using LOGIC.Interfaces;
+using LOGIC.Interfaces.Repositories;
 using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using System;
@@ -7,9 +8,7 @@ using System.Threading.Tasks;
 
 namespace LOGIC.Services
 {
-    /// <summary>
-    /// This service allows us to Add, Fetch and Update Leeruitkomst Data
-    /// </summary>
+
     public class LeeruitkomstService : ILeeruitkomstService
     {
         private readonly ILeeruitkomstRepository _repository;
@@ -19,16 +18,12 @@ namespace LOGIC.Services
             _repository = repository;
         }
 
-        //Add Leeruitkomst Entiteit in de database
-        //Indien geslaagd: geef ResultObject met Leeruitkomst en succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Leeruitkomst>> AddLeeruitkomst(Leeruitkomst leeruitkomst)
+        public async Task<ResultObject<Leeruitkomst>> CreateLeeruitkomst(Leeruitkomst leeruitkomst)
         {
             ResultObject<Leeruitkomst> result = new();
             try
             {
-                leeruitkomst = await _repository.Create(leeruitkomst);
-                result.ResultSet = leeruitkomst;
+                result.ResultSet = await _repository.Create(leeruitkomst);
                 result.Success = true;
             }
             catch (Exception exception)
@@ -39,16 +34,12 @@ namespace LOGIC.Services
             return result;
         }
 
-        //get Leeruitkomst Entity from the database
-        //Indien geslaagd: geef ResultObject met Leeruitkomst en succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Leeruitkomst>> GetLeeruitkomstById(int leeruitkomstId)
+        public async Task<ResultObject<Leeruitkomst>> ReadLeeruitkomst(int id)
         {
             ResultObject<Leeruitkomst> result = new();
             try
             {
-                Leeruitkomst leeruitkomst = await _repository.Read<Leeruitkomst>(leeruitkomstId);
-                result.ResultSet = leeruitkomst;
+                result.ResultSet = await _repository.Read(id);
                 result.Success = true;
             }
             catch (Exception exception)
@@ -59,38 +50,12 @@ namespace LOGIC.Services
             return result;
         }
 
-
-        public async Task<ResultObject<List<Leeruitkomst>>> GetLeeruitkomstenByEvlId(int evlId)
-        {
-            ResultObject<List<Leeruitkomst>> result = new();
-            try
-            {
-                List<Leeruitkomst> leeruitkomsten = await _repository.GetLeeruitkomstenByEvlId(evlId);
-                result.ResultSet = leeruitkomsten;
-                result.Success = true;
-            }
-            catch (Exception exception)
-            {
-                result.Exception = exception;
-                result.Message = "failed to find the EVL.";
-            }
-            return result;
-        }
-
-
-        //update Leeruitkomst Entiteit in de database
-        //Indien geslaagd: geef ResultObject met Leeruitkomst en succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Leeruitkomst>> UpdateLeeruitkomst(Leeruitkomst leeruitkomst)
+        public async Task<ResultObject<Leeruitkomst>> UpdateLeeruitkomst(int id, Leeruitkomst leeruitkomst)
         {
             ResultObject<Leeruitkomst> result = new();
             try
             {
-                Leeruitkomst existingLeeruitkomst = await _repository.Read<Leeruitkomst>(leeruitkomst.Id);
-                existingLeeruitkomst.Naam = leeruitkomst.Naam;
-                existingLeeruitkomst.Beschrijving = leeruitkomst.Beschrijving;
-                leeruitkomst = await _repository.Update(existingLeeruitkomst, existingLeeruitkomst.Id);
-                result.ResultSet = existingLeeruitkomst;
+                result.ResultSet = await _repository.Update(leeruitkomst, id);
                 result.Success = true;
             }
             catch (Exception exception)
@@ -101,15 +66,12 @@ namespace LOGIC.Services
             return result;
         }
 
-        //Delete Leeruitkomst Entiteit in de database
-        //Indien geslaagd: geef ResultObject met succesmelding terug aan de controller
-        //Indien mislukt: geef ResultObject met errormelding terug aan de controller
-        public async Task<ResultObject<Leeruitkomst>> DeleteLeeruitkomst(int id)
+        public async Task<ResultObject<bool>> DeleteLeeruitkomst(int id)
         {
-            ResultObject<Leeruitkomst> result = new();
+            ResultObject<bool> result = new();
             try
             {
-                bool isDeleted = await _repository.Delete<Leeruitkomst>(id);
+                bool isDeleted = await _repository.Delete(id);
                 result.Message = "Succesfully deleted Leeruitkomst.";
                 result.Success = true;
             }
@@ -120,5 +82,21 @@ namespace LOGIC.Services
             }
             return result;
         }
+
+        /*public async Task<ResultObject<List<Leeruitkomst>>> GetLeeruitkomstenByEvlId(int evlId)
+        {
+            ResultObject<List<Leeruitkomst>> result = new();
+            try
+            {
+                result.ResultSet = await _repository.GetLeeruitkomstenByEvlId(evlId);
+                result.Success = true;
+            }
+            catch (Exception exception)
+            {
+                result.Exception = exception;
+                result.Message = "failed to find the EVL.";
+            }
+            return result;
+        }*/
     }
 }

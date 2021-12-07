@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
 using LOGIC.Models;
-using WEB_API.Schemas.Leeruitkomst;
+using WEB_API.Contracts.Leeruitkomst;
 
 namespace WEB_API.Mapping
 {
-    public class Mapping : Profile
+    public class LeeruitkomstMapping : Profile
     {
-        public Mapping()
+        public LeeruitkomstMapping()
         {
-            CreateMap<CreateLeeruitkomstSchema, Leeruitkomst>();
-            CreateMap<UpdateLeeruitkomstSchema, Leeruitkomst>();
-            CreateMap<Leeruitkomst, LeeruitkomstResponse>();
+            CreateMap<Leeruitkomst, LeeruitkomstResponse>().ReverseMap();
+            CreateMap<CreateLeeruitkomstRequest, Leeruitkomst>();  
+            CreateMap<UpdateLeeruitkomstRequest, Leeruitkomst>();
         }
     }
 }

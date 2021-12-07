@@ -10,6 +10,8 @@ namespace DAL
         public static IServiceCollection AddLogic(this IServiceCollection services)
         {
             services.AddScoped<ILeeruitkomstService, LeeruitkomstService>();
+            services.AddScoped<ITentamineringService, TentamineringService>();
+            services.AddScoped<IRubricService, RubricService>();
             services.AddScoped<IEvlService, EvlService>();
             return services;
         }
