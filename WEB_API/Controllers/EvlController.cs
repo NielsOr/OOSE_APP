@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using LOGIC.Interfaces;
 using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +14,6 @@ namespace WEB_API.Controllers
     {
         private readonly IEvlService _evlService;
         private readonly IMapper _mapper;
-
         public EvlController(IEvlService evlService, IMapper mapper)
         {
             _evlService = evlService;
@@ -63,7 +61,7 @@ namespace WEB_API.Controllers
             var result = await _evlService.DeleteEvl(id);
             return result.Success == true ? Ok(result.Message) : StatusCode(500, result.Message);
         }
-          
+
         [HttpGet]
         [Route("")]
         public async Task<IActionResult> ReadAll()
@@ -71,8 +69,5 @@ namespace WEB_API.Controllers
             var result = await _evlService.ReadAllEvls();
             return result.Success == true ? Ok(_mapper.Map<List<EvlResponse>>(result.ResultSet)) : StatusCode(500, result.Message);
         }
-
-        
-
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LOGIC.Models
+﻿namespace LOGIC.Models
 {
     public class FileResultObject
     {

@@ -1,5 +1,4 @@
 ﻿using DAL.Context;
-using LOGIC.Interfaces;
 using LOGIC.Interfaces.Repositories;
 using LOGIC.Models;
 using Microsoft.EntityFrameworkCore;
@@ -65,6 +64,5 @@ namespace DAL.Repositories
         {
             return await _dbContext.Evls.ToListAsync();
         }
-
     }
 }

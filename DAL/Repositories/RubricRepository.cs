@@ -1,9 +1,7 @@
 ﻿using DAL.Context;
-using LOGIC.Interfaces;
 using LOGIC.Interfaces.Repositories;
 using LOGIC.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,7 +27,7 @@ namespace DAL.Repositories
         {
             return await _dbContext.Rubrics.Where(x => x.Id == id).Include(x => x.Beoordelingscriteria).SingleAsync();
         }
- 
+
         public async Task<Rubric> Update(int id, Rubric objectToUpdate)
         {
             var objectFound = await _dbContext.Rubrics.Where(x => x.Id == id).Include(x => x.Beoordelingscriteria).SingleAsync();
@@ -56,6 +54,5 @@ namespace DAL.Repositories
             }
             return false;
         }
-
     }
 }

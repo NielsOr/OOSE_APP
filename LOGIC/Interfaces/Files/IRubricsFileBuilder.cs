@@ -8,6 +8,5 @@ namespace LOGIC.Interfaces.Files
         FileResultObject BuildFileCSV(IEnumerable<Rubric> records);
         FileResultObject BuildFileDOCX(IEnumerable<Rubric> records);
         FileResultObject BuildFilePDF(IEnumerable<Rubric> records);
-
     }
 }

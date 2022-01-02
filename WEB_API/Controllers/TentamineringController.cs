@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using LOGIC.Interfaces;
 using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using WEB_API.Contracts.Tentaminering;
-using WEB_API.Contracts.TentamineringLeeruitkomst;
 
 namespace WEB_API.Controllers
 {

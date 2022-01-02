@@ -1,12 +1,9 @@
 ﻿using DAL.Context;
-using LOGIC.Interfaces;
 using LOGIC.Interfaces.Repositories;
 using LOGIC.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace DAL.Repositories
 {
@@ -24,7 +21,7 @@ namespace DAL.Repositories
             await _dbContext.SaveChangesAsync();
             return tentaminering;
         }
-        
+
         public async Task<Tentaminering> Read(int id)
         {
             var result = await _dbContext.Tentamineringen
@@ -33,7 +30,7 @@ namespace DAL.Repositories
                 .Include(t => t.Rubrics)
                 .ThenInclude(r => r.Beoordelingscriteria)
                 .FirstAsync(x => x.Id == id);
-                
+
             return result;
         }
 
@@ -42,14 +39,14 @@ namespace DAL.Repositories
             var objectFound = await _dbContext.Tentamineringen.Where(x => x.Id == id).Include(x => x.Leeruitkomsten).SingleAsync();
             if (objectFound != null)
             {
-                objectFound.Naam            = objectToUpdate.Naam;
-                objectFound.Code            = objectToUpdate.Code;
+                objectFound.Naam = objectToUpdate.Naam;
+                objectFound.Code = objectToUpdate.Code;
                 objectFound.Aanmeldingstype = objectToUpdate.Aanmeldingstype;
-                objectFound.Hulpmiddelen    = objectToUpdate.Hulpmiddelen;
-                objectFound.Weging          = objectToUpdate.Weging;
+                objectFound.Hulpmiddelen = objectToUpdate.Hulpmiddelen;
+                objectFound.Weging = objectToUpdate.Weging;
                 objectFound.MinimaalOordeel = objectToUpdate.MinimaalOordeel;
-                objectFound.Tentamenvorm    = objectToUpdate.Tentamenvorm;
-                objectFound.Leeruitkomsten  = objectToUpdate.Leeruitkomsten;
+                objectFound.Tentamenvorm = objectToUpdate.Tentamenvorm;
+                objectFound.Leeruitkomsten = objectToUpdate.Leeruitkomsten;
                 await _dbContext.SaveChangesAsync();
             }
             return objectFound;

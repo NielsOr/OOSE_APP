@@ -30,8 +30,6 @@ namespace DAL.Context.Config
                    .WithOne(tentaminering => tentaminering.Evl)
                    .HasForeignKey(tentaminering => tentaminering.Id)
                    .OnDelete(DeleteBehavior.Restrict); // te bepalen*/
-
-
         }
     }
 }

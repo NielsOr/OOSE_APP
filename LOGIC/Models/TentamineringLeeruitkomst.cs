@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace LOGIC.Models
+﻿namespace LOGIC.Models
 {
     public class TentamineringLeeruitkomst
     {

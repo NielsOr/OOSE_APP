@@ -1,4 +1,5 @@
 using DAL;
+using LOGIC;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +29,6 @@ namespace WEB_API
             services.AddInfrastructure(Configuration);
             services.AddLogic();
             services.AddAutoMapper(typeof(Startup));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,7 +48,6 @@ namespace WEB_API
             {
                 endpoints.MapControllers();
             });
-
         }
     }
 }

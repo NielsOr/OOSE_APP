@@ -1,9 +1,7 @@
-﻿using LOGIC.Interfaces;
-using LOGIC.Interfaces.Repositories;
+﻿using LOGIC.Interfaces.Repositories;
 using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LOGIC.Services
@@ -50,7 +48,7 @@ namespace LOGIC.Services
             }
             return result;
         }
-       
+
         public async Task<ResultObject<Rubric>> UpdateRubric(int id, Rubric rubric)
         {
             ResultObject<Rubric> result = new();
@@ -79,11 +77,10 @@ namespace LOGIC.Services
             }
             catch (Exception exception)
             {
-                result.Exception = exception; 
+                result.Exception = exception;
                 result.Message = "Failed to delete Rubric.";
             }
             return result;
         }
-
     }
 }

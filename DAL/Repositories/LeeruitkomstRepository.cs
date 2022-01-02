@@ -1,10 +1,7 @@
 ﻿using DAL.Context;
-using LOGIC.Interfaces;
 using LOGIC.Interfaces.Repositories;
 using LOGIC.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -54,6 +51,5 @@ namespace DAL.Repositories
             }
             return false;
         }
-
     }
 }

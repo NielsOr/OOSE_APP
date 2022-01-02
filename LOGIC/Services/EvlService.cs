@@ -13,8 +13,6 @@ namespace LOGIC.Services
     public class EvlService : IEvlService
     {
         private readonly IEvlRepository _repository;
-        
-
         public EvlService(IEvlRepository repository)
         {
             _repository = repository;
@@ -98,9 +96,5 @@ namespace LOGIC.Services
             }
             return result;
         }
-
-        
-
-
     }
 }

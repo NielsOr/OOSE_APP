@@ -1,11 +1,9 @@
 ﻿using LOGIC.Enums;
-using LOGIC.Interfaces;
 using LOGIC.Interfaces.Files;
 using LOGIC.Interfaces.Repositories;
 using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LOGIC.Services
@@ -123,7 +121,7 @@ namespace LOGIC.Services
                 result.Message = "failed to find the Tentamineringen.";
             }
             return result;
-            
-       }
+
+        }
     }
 }

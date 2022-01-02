@@ -2,7 +2,7 @@
 
 namespace LOGIC.Models
 {
-    public class Tentaminering 
+    public class Tentaminering
     {
         public int Id { get; set; }
         public int EvlId { get; set; }

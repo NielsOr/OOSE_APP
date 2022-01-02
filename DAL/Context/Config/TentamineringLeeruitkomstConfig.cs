@@ -18,6 +18,6 @@ namespace DAL.Context.Config
             builder.Property(tentamineringleeruitkomst => tentamineringleeruitkomst.LeeruitkomstId).IsRequired(true);
             //COLUMNS
             builder.Property(tentaminering => tentaminering.Beoordelingcriteria).IsRequired(true).HasMaxLength(300);
-        }    
+        }
     }
 }

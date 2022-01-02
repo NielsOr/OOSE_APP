@@ -9,7 +9,7 @@ namespace WEB_API.Mapping
         public LeeruitkomstMapping()
         {
             CreateMap<Leeruitkomst, LeeruitkomstResponse>().ReverseMap();
-            CreateMap<CreateLeeruitkomstRequest, Leeruitkomst>();  
+            CreateMap<CreateLeeruitkomstRequest, Leeruitkomst>();
             CreateMap<UpdateLeeruitkomstRequest, Leeruitkomst>();
         }
     }

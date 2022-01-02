@@ -1,5 +1,4 @@
 ﻿using LOGIC.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LOGIC.Interfaces.Repositories
@@ -10,6 +9,5 @@ namespace LOGIC.Interfaces.Repositories
         Task<Leeruitkomst> Read(int id);
         Task<Leeruitkomst> Update(Leeruitkomst objectToUpdate, int id);
         Task<bool> Delete(int id);
-
     }
 }

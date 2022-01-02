@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using LOGIC.Models;
-using System;
 using WEB_API.Contracts.Rubric;
 using WEB_API.Contracts.RubricCriterium;
 

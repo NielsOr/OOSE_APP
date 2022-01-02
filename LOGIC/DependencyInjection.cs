@@ -1,9 +1,8 @@
-﻿using LOGIC.Interfaces;
-using LOGIC.Interfaces.Services;
+﻿using LOGIC.Interfaces.Services;
 using LOGIC.Services;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DAL
+namespace LOGIC
 {
     public static class DependencyInjection
     {

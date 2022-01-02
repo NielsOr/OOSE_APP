@@ -1,5 +1,4 @@
-﻿using LOGIC.Interfaces.Repositories;
-using LOGIC.Models;
+﻿using LOGIC.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

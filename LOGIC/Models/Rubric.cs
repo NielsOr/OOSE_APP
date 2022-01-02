@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 
-
 namespace LOGIC.Models
 {
-    public class Rubric 
+    public class Rubric
     {
         public int Id { get; set; }
         public int TentamineringId { get; set; }
@@ -13,6 +12,5 @@ namespace LOGIC.Models
         public double MinimaalOordeel { get; set; }
         public string Beschrijving { get; set; }
         public List<RubricCriterium> Beoordelingscriteria { get; set; }
-
     }
 }
