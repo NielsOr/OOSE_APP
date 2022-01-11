@@ -1,5 +1,4 @@
 ﻿using LOGIC.Models;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LOGIC.Interfaces.Repositories
@@ -10,6 +9,6 @@ namespace LOGIC.Interfaces.Repositories
         Task<Tentaminering> Read(int id);
         Task<Tentaminering> Update(int id, Tentaminering objectToUpdate);
         Task<bool> Delete(int id);
-        
+
     }
 }

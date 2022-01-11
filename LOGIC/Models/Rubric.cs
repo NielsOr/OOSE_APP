@@ -3,7 +3,7 @@
 
 namespace LOGIC.Models
 {
-    public class Rubric 
+    public class Rubric : RevisableObject
     {
         public int Id { get; set; }
         public int TentamineringId { get; set; }

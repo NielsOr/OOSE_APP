@@ -10,7 +10,7 @@ namespace DAL.Files
     public class RubricsFileBuilder : IRubricsFileBuilder
     {
         public FileResultObject BuildFileCSV(IEnumerable<Rubric> records)
-        {   
+        {
             using var memoryStream = new MemoryStream();
             using (var streamWriter = new StreamWriter(memoryStream))
             {

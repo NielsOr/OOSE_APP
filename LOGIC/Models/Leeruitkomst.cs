@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace LOGIC.Models
+﻿namespace LOGIC.Models
 {
-    public class Leeruitkomst 
+    public class Leeruitkomst : RevisableObject
     {
         public int Id { get; set; }
         public int EvlId { get; set; }

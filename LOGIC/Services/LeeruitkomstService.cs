@@ -1,9 +1,7 @@
-﻿using LOGIC.Interfaces;
-using LOGIC.Interfaces.Repositories;
+﻿using LOGIC.Interfaces.Repositories;
 using LOGIC.Interfaces.Services;
 using LOGIC.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LOGIC.Services
@@ -83,20 +81,5 @@ namespace LOGIC.Services
             return result;
         }
 
-        /*public async Task<ResultObject<List<Leeruitkomst>>> GetLeeruitkomstenByEvlId(int evlId)
-        {
-            ResultObject<List<Leeruitkomst>> result = new();
-            try
-            {
-                result.ResultSet = await _repository.GetLeeruitkomstenByEvlId(evlId);
-                result.Success = true;
-            }
-            catch (Exception exception)
-            {
-                result.Exception = exception;
-                result.Message = "failed to find the EVL.";
-            }
-            return result;
-        }*/
     }
 }

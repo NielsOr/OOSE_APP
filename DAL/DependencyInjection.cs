@@ -1,6 +1,6 @@
-﻿using DAL.Context;
+﻿using DAL.Database.Context;
+using DAL.Database.Repositories;
 using DAL.Files;
-using DAL.Repositories;
 using LOGIC.Interfaces.Files;
 using LOGIC.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +19,8 @@ namespace DAL
                     b => b.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName)));
 
             services.AddScoped<IEvlRepository, EvlRepository>();
-            services.AddScoped<ITentamineringRepository, TentamineringRepository>();
             services.AddScoped<ILeeruitkomstRepository, LeeruitkomstRepository>();
+            services.AddScoped<ITentamineringRepository, TentamineringRepository>();
             services.AddScoped<IRubricRepository, RubricRepository>();
             services.AddScoped<IRubricsFileBuilder, RubricsFileBuilder>();
 

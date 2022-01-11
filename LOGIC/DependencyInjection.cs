@@ -1,5 +1,4 @@
-﻿using LOGIC.Interfaces;
-using LOGIC.Interfaces.Services;
+﻿using LOGIC.Interfaces.Services;
 using LOGIC.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -9,10 +8,10 @@ namespace DAL
     {
         public static IServiceCollection AddLogic(this IServiceCollection services)
         {
+            services.AddScoped<IEvlService, EvlService>();
             services.AddScoped<ILeeruitkomstService, LeeruitkomstService>();
             services.AddScoped<ITentamineringService, TentamineringService>();
             services.AddScoped<IRubricService, RubricService>();
-            services.AddScoped<IEvlService, EvlService>();
             return services;
         }
     }

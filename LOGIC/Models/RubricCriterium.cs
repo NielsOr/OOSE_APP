@@ -1,7 +1,7 @@
 ﻿
 namespace LOGIC.Models
 {
-    public class RubricCriterium 
+    public class RubricCriterium : RevisableObject
     {
         public int Id { get; set; }
         public int RubricId { get; set; }

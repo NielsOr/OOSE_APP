@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace LOGIC.Models
+﻿namespace LOGIC.Models
 {
-    public class TentamineringLeeruitkomst
+    public class TentamineringLeeruitkomst : RevisableObject
     {
         public int Id { get; set; }
         public string Beoordelingcriteria { get; set; }

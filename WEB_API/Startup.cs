@@ -24,10 +24,11 @@ namespace WEB_API
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "WEB_API", Version = "v1" }); });
+            services.AddAutoMapper(typeof(Startup));
             //add services from other layers.
             services.AddInfrastructure(Configuration);
             services.AddLogic();
-            services.AddAutoMapper(typeof(Startup));
+
 
         }
 
