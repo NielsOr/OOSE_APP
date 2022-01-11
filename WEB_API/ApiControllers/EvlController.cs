@@ -24,8 +24,6 @@ namespace WEB_API.ApiControllers
         //201 (Created), ‘Location’ header with link to the new resource containing new ID
         //200 (OK)
         //204 (No Content)
-        //TEST
-        //TEST2
         [HttpPost]
         [Route("")]
         public async Task<IActionResult> CreateEvl(EvlRequest request)
