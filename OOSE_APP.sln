@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WEB_API", "WEB_API\WEB_API.csproj", "{24469A17-A271-4308-9875-8B7CBB038345}"
 EndProject
@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{2
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LOGIC", "LOGIC\LOGIC.csproj", "{9B83E05D-D8E6-4DC7-8E37-27F49A83BE69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LOGIC.Tests", "LOGIC.Tests\LOGIC.Tests.csproj", "{FD534639-2C8D-43D8-8C57-7B8D3B269270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LOGIC.Tests", "LOGIC.Tests\LOGIC.Tests.csproj", "{FD534639-2C8D-43D8-8C57-7B8D3B269270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIENT", "CLIENT\CLIENT.csproj", "{C801305A-491A-4DA3-ABEA-8A0DD9D50C0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{FD534639-2C8D-43D8-8C57-7B8D3B269270}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD534639-2C8D-43D8-8C57-7B8D3B269270}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD534639-2C8D-43D8-8C57-7B8D3B269270}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C801305A-491A-4DA3-ABEA-8A0DD9D50C0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C801305A-491A-4DA3-ABEA-8A0DD9D50C0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C801305A-491A-4DA3-ABEA-8A0DD9D50C0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C801305A-491A-4DA3-ABEA-8A0DD9D50C0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
